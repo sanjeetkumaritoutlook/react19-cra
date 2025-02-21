@@ -2,6 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+npx create-react-app react19-cra
+
+# Create a New React App with TypeScript
+Run the following command:
+
+npx create-react-app react19-cra --template typescript
+
+What happens here?
+•	npx ensures you're using the latest Create React App version.
+•	react19-cra is your project folder name.
+•	--template typescript sets up TypeScript instead of JavaScript
+
+
+React 19 - fluid-form : https://stackblitz.com/edit/react-ts-ymaezsrb?file=index.tsx
+
 ## Available Scripts
 
 In the project directory, you can run:
