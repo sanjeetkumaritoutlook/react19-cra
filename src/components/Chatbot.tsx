@@ -54,7 +54,7 @@ const Chatbot: React.FC = () => {
       if (!userInput.trim()) return;
       setMessages([...messages, { role: "User", text: userInput }]);
       setLoading(true);
-
+      console.log('sanjeet'+loading);
     try {
         const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyCUGWS0iGNhAkKIXcgVrNDwKWbVToIPPaw", {
             method: "POST",
