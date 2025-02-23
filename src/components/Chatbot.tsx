@@ -5,11 +5,12 @@ import {
   Button,
   Typography,
   Paper,
-  CircularProgress,
   Avatar,
-  IconButton
+  useTheme
 } from "@mui/material";
-import { Mic, MicOff, DarkMode, LightMode } from "@mui/icons-material";
+//import { Mic, MicOff, DarkMode, LightMode } from "@mui/icons-material";
+import MicIcon from "@mui/icons-material/Mic";
+import SendIcon from "@mui/icons-material/Send";
 //defining explicitly type
 declare global {
     interface Window {
@@ -21,11 +22,12 @@ const Chatbot: React.FC = () => {
     const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
     const [userInput, setUserInput] = useState("");
     const [loading, setLoading] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
-    const [listening, setListening] = useState(false);
+  //  const [darkMode, setDarkMode] = useState(false);
+   // const [listening, setListening] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const recognitionRef = useRef<any>(null);
-  
+    const theme = useTheme();
+
     useEffect(() => {
         if ("webkitSpeechRecognition" in window) {
           const recognition = new window.webkitSpeechRecognition();
@@ -45,6 +47,9 @@ const Chatbot: React.FC = () => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
   
+    const startListening = () => {
+        recognitionRef.current?.start();
+      };
     const sendMessage = async () => {
       if (!userInput.trim()) return;
       setMessages([...messages, { role: "User", text: userInput }]);
@@ -69,67 +74,80 @@ const Chatbot: React.FC = () => {
         }
       };
     
-      const toggleListening = () => {
-        if (recognitionRef.current) {
-          if (listening) {
-            recognitionRef.current.stop();
-          } else {
-            recognitionRef.current.start();
-          }
-          setListening(!listening);
-        }
-      };
+    //   const toggleListening = () => {
+    //     if (recognitionRef.current) {
+    //       if (listening) {
+    //         recognitionRef.current.stop();
+    //       } else {
+    //         recognitionRef.current.start();
+    //       }
+    //       setListening(!listening);
+    //     }
+    //   };
     
       return (
-        <Box sx={{ width: "100%", mx: "auto", mt: 2, p: 2, bgcolor: darkMode ? "#121212" : "#f5f5f5", color: darkMode ? "#fff" : "#000", minHeight: "100vh" }}>
-          {/* Dark Mode Toggle */}
-          <Box display="flex" justifyContent="flex-end">
-            <IconButton onClick={() => setDarkMode(!darkMode)} color="inherit">
-              {darkMode ? <LightMode /> : <DarkMode />}
-            </IconButton>
-          </Box>
-    
-          {/* Chat Window */}
-          <Paper sx={{ p: 2, height: 500, overflowY: "auto", bgcolor: darkMode ? "#333" : "#fff", borderRadius: 2 }}>
-            {messages.map((msg, index) => (
-              <Box key={index} display="flex" alignItems="center" gap={1} sx={{ mb: 2, flexDirection: msg.role === "User" ? "row-reverse" : "row" }}>
-                <Avatar sx={{ bgcolor: msg.role === "User" ? "primary.main" : "secondary.main" }}>
-                  {msg.role === "User" ? "U" : "AI"}
-                </Avatar>
-                <Typography
-                  sx={{
-                    p: 1,
-                    borderRadius: 1,
-                    bgcolor: msg.role === "User" ? "primary.light" : "secondary.light",
-                    color: "black",
-                    maxWidth: "70%",
-                  }}
-                >
-                  {msg.text}
-                </Typography>
-              </Box>
-            ))}
-            {loading && <CircularProgress size={24} sx={{ display: "block", mx: "auto" }} />}
-            <div ref={messagesEndRef} />
-          </Paper>
-    
-          {/* Input and Controls */}
-          <Box sx={{ display: "flex", gap: 1, mt: 2 }}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Ask something..."
-            />
-            <IconButton onClick={toggleListening} color={listening ? "error" : "primary"}>
-              {listening ? <MicOff /> : <Mic />}
-            </IconButton>
-            <Button variant="contained" color="primary" onClick={sendMessage}>
-              Send
-            </Button>
-          </Box>
+        <Box
+        sx={{
+          margin: "auto",
+          padding: 2,
+          backgroundColor: theme.palette.mode === "dark" ? "#1e1e1e" : "#f5f5f5",
+          borderRadius: 2,
+        }}
+      >
+        <Typography variant="h5" align="center" gutterBottom>
+          AI Chatbot 🤖
+        </Typography>
+  
+        {/* Chat Messages */}
+        <Box sx={{ maxHeight: 300, overflowY: "auto", padding: 1 }}>
+          {messages.map((msg, index) => (
+            <Paper
+              key={index}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: 1,
+                marginBottom: 1,
+                backgroundColor:
+                  msg.role === "User"
+                    ? theme.palette.primary.light
+                    : theme.palette.secondary.light,
+              }}
+            >
+              <Avatar sx={{ marginRight: 1 }}>
+                {msg.role === "User" ? "👤" : "🤖"}
+              </Avatar>
+              <Typography
+                sx={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}
+              >
+                {msg.text}
+              </Typography>
+            </Paper>
+          ))}
         </Box>
+  
+        {/* Input & Buttons */}
+        <Box sx={{ display: "flex", alignItems: "center", marginTop: 2 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            placeholder="Type a message..."
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+          />
+          <Button onClick={startListening} sx={{ marginLeft: 1 }}>
+            <MicIcon />
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={sendMessage}
+            sx={{ marginLeft: 1 }}
+          >
+            <SendIcon />
+          </Button>
+        </Box>
+      </Box>
       );
     };
     
