@@ -60,3 +60,16 @@ After making these changes, restart your dev server:
 npm start
 
 tailwind may be incompatible with react 19
+
+You can use Material-UI (MUI) instead of Tailwind CSS in your React chatbot component. MUI provides prebuilt components with styling, making it easy to create a professional-looking chatbot UI.
+
+
+Install MUI in Your React Project
+Run this command to install MUI and its dependencies:
+npm install @mui/material @emotion/react @emotion/styled
+
+Features of This MUI Chatbot UI
+✅ Uses MUI components (Box, TextField, Button, Paper, Typography)
+✅ Responsive and modern UI
+✅ Loading indicator (CircularProgress)
+✅ Message styling with MUI themes
