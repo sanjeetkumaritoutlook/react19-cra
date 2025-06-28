@@ -8,7 +8,7 @@ interface MyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
 }
 
-const MyButton: React.FC<MyButtonProps> = ({
+const MyButton = (({
   label,
   variant = 'primary',
   size = 'md',
@@ -16,7 +16,7 @@ const MyButton: React.FC<MyButtonProps> = ({
   loading = false,
   disabled,
   ...props
-}) => {
+}: MyButtonProps) => {
   const baseStyles: React.CSSProperties = {
     border: 'none',
     borderRadius: 8,
@@ -81,6 +81,6 @@ const MyButton: React.FC<MyButtonProps> = ({
       </style>
     </button>
   );
-};
+}) as React.FC<MyButtonProps>;
 
 export default MyButton;

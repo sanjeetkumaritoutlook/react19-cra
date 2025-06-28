@@ -1,3 +1,37 @@
+# using the Library components in React 19+ only
+npm i react19-cra
+
+import { MyButton, MyCard } from 'react19-cra'
+
+In src/App.tsx or any component:
+
+```
+import React from 'react';
+import { MyButton, MyCard } from 'react19-cra'; 
+
+const App = () => {
+  return (
+    <div style={{ padding: 20 }}>
+      <MyCard
+        title="Hello Card"
+        description="This card is from my custom library."
+        image="https://picsum.photos/300/150"
+        onClick={() => alert('Card clicked!')}
+      >
+        <MyButton
+          label="Click Me"
+          variant="primary"
+          onClick={() => alert('Button clicked!')}
+        />
+      </MyCard>
+    </div>
+  );
+};
+
+export default App;
+```
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -17,6 +51,22 @@ What happens here?
 
 React 19 - fluid-form : https://stackblitz.com/edit/react-ts-ymaezsrb?file=index.tsx
 
+## Publish React component to npm registry as library
+npm install --save-dev tsup typescript
+
+Use tools like rollup or tsup to bundle your code.
+
+Option: Use tsup (easier and faster)
+
+Add a tsup.config.ts
+
+Build script in package.json
+
+"build": "tsup"
+
+npm install -D @swc/core
+
+tsup uses SWC (a fast JS/TS compiler) to support ES5
 ## Available Scripts
 
 In the project directory, you can run:

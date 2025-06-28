@@ -9,14 +9,15 @@ interface MyCardProps {
   style?: React.CSSProperties;
 }
 
-const MyCard: React.FC<MyCardProps> = ({
+// Declare as regular function and cast to React.FC
+const MyCard = (({
   title,
   description,
   image,
   children,
   onClick,
   style,
-}) => {
+}: MyCardProps) => {
   return (
     <div
       onClick={onClick}
@@ -47,6 +48,6 @@ const MyCard: React.FC<MyCardProps> = ({
       </div>
     </div>
   );
-};
+}) as React.FC<MyCardProps>;
 
 export default MyCard;
