@@ -1,6 +1,6 @@
 {
   "name": "react19-cra",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://sanjeetkumaritoutlook.github.io/react19-cra",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",

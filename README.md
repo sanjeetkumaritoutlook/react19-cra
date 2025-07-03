@@ -32,6 +32,34 @@ export default App;
 ```
 
 
+## Free models in India
+https://aistudio.google.com/apikey
+
+https://generativelanguage.googleapis.com/v1/models?key=YOUR_API_KEY 
+
+https://ai.google.dev/gemini-api/docs/models
+
+https://ai.google.dev/gemini-api/docs/rate-limits
+
+https://ai.google.dev/gemini-api/docs/available-regions
+
+google cloud console
+
+https://console.cloud.google.
+
+✔️Use different Google Cloud projects if you need separate quotas for each API key.
+✔️ Monitor usage in Google Cloud Console → APIs & Services → Dashboard.
+✔️ Restrict API keys to specific apps or IPs for security.
+
+A Google Cloud project is created inside a Google Cloud account.
+
+A single Gmail account (Google account) can own or manage multiple projects.
+
+You can create multiple projects under the same Gmail, each with its own API keys and quotas.
+
+Each project has its own separate billing, quotas, and API keys (unless they share the same billing account).
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
