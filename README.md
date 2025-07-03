@@ -95,6 +95,12 @@ Build script in package.json
 npm install -D @swc/core
 
 tsup uses SWC (a fast JS/TS compiler) to support ES5
+
+### gha vs npm publish
+
+"build": "react-scripts build",
+
+"build": "tsup",
 ## Available Scripts
 
 In the project directory, you can run:
@@ -121,6 +127,11 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm login`
+
+### `npm publish --access public`
+
 
 ### `npm run eject`
 
